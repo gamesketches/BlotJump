@@ -9,7 +9,7 @@ public class SlopeGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		daSlope = GetComponent<EdgeCollider2D>();
-		slopePoints = new Vector2[3] {new Vector2(-20, 10), new Vector2(-2, -1), new Vector2(14, 2)};
+		slopePoints = new Vector2[3] {new Vector2(-20, 15), new Vector2(5, 0), new Vector2(12, 3)};
 		Keyframe[] slopePointsKeyFrames = new Keyframe[3];
 		for(int i = 0; i < slopePoints.Length; i++) {
 			slopePointsKeyFrames[i] = new Keyframe(slopePoints[i].x, slopePoints[i].y);
