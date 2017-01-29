@@ -61,17 +61,26 @@ public class PlayerController : MonoBehaviour {
 
 	IEnumerator Introduction() {
 		float t = 0;
+		Light dirLight = GameObject.Find("Directional Light").GetComponent<Light>();
 		Vector3 targetPosition = new Vector3(1, 0, -10);
 		Vector3 startPosition = Camera.main.transform.localPosition;
 		float startSize = Camera.main.orthographicSize;
 		float targetSize = 20;
+		while(t < 2) {
+			dirLight.intensity = 10;
+			t += Time.deltaTime;
+			yield return null;
+		}
+		t = 0;
 		while(t < 1) {
+			dirLight.intensity = 10;
 			Camera.main.transform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
 			Camera.main.orthographicSize = Mathf.Lerp(startSize, targetSize, t);
 			t += Time.deltaTime / 3;
 			yield return null;
 		}
 
+		dirLight.intensity = 0;
 		started = true;
 		rb.gravityScale = 10;
 	}
