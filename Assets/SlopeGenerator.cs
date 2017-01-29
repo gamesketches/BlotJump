@@ -9,14 +9,14 @@ public class SlopeGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		daSlope = GetComponent<EdgeCollider2D>();
-		slopePoints = new Vector2[3] {new Vector2(-20, 15), new Vector2(5, 0), new Vector2(12, 3)};
+		slopePoints = new Vector2[3] {new Vector2(0, 3.5f), new Vector2(12, -1.2f), new Vector2(20, 2)};
 		Keyframe[] slopePointsKeyFrames = new Keyframe[3];
 		for(int i = 0; i < slopePoints.Length; i++) {
 			slopePointsKeyFrames[i] = new Keyframe(slopePoints[i].x, slopePoints[i].y);
 		}
 		AnimationCurve bezierCurve = new AnimationCurve(slopePointsKeyFrames);
 		List<Vector2> morePoints = new List<Vector2>();
-		for(float timer = -20; timer < 14; timer += 0.1f){
+		for(float timer = slopePoints[0].x; timer < slopePoints[2].x; timer += 0.1f){
 			morePoints.Add(new Vector2(timer, bezierCurve.Evaluate(timer)));
 		}
 
