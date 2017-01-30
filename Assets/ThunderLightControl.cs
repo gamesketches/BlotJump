@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class ThunderLightControl : MonoBehaviour {
-	Light thunder;
 
+	Light thunder;
+	AudioSource audioSource;
 	float randomFrameForLighting; 
 	float thunderRange;
 	float lightingMinusEasing;
@@ -17,6 +18,7 @@ public class ThunderLightControl : MonoBehaviour {
 	void Start () {
 		active = true;
 		thunder = gameObject.GetComponent<Light>();
+		audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -40,6 +42,7 @@ public class ThunderLightControl : MonoBehaviour {
 
 	// this is the function suddently turn on light
 	void LightOn(){
+			audioSource.Play();
 		// turn on light for a frame
 		thunderRange = 8.0f;
 		thunder.intensity = thunderRange;

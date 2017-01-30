@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(Input.GetKeyDown(KeyCode.R)) {
+			SceneManager.LoadScene(0);
+		}
 		if(started) {
 			string distance = (Random.value * 1000).ToString();
 			distanceMarker.text = distance.Substring(0, distance.IndexOf('.') + 2);
