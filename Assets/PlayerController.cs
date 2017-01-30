@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	bool jumping;
 	float curGravity = 1;
 	bool switched = false;
+	AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 		rb.gravityScale = 0;
 		StartCoroutine(Introduction());
+		audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -49,6 +51,9 @@ public class PlayerController : MonoBehaviour {
 				if(transform.position.x > 41 && !switched) {
 					SpriteRenderer rend = GetComponentsInChildren<SpriteRenderer>()[1];
 					rend.sprite = Resources.Load<Sprite>("SkierTrip");
+					audioSource.clip = Resources.Load<AudioClip>("landSound");
+					audioSource.loop = false;
+					audioSource.Play();
 					switched = true;
 					curGravity = 3;
 				}
@@ -64,6 +69,7 @@ public class PlayerController : MonoBehaviour {
 			grounded = true;
 			jumping = false;
 			transform.GetChild(1).up = other.contacts[0].normal;
+			audioSource.Play();
 		}
 		else {
 			rb.velocity = Vector2.zero;
@@ -81,6 +87,7 @@ public class PlayerController : MonoBehaviour {
 			if(!jumping) {
 				rb.gravityScale = 3;
 			}
+			audioSource.Stop();
 		}
 	}
 
