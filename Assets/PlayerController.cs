@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 				rb.gravityScale = 1;
 				rb.AddForce(Vector2.up * 100, ForceMode2D.Impulse);
 				jumping = true;
-				Debug.Log("jamp");
+				ParticleSystem particles = (ParticleSystem)Instantiate(Resources.Load<ParticleSystem>("JumpBurst"), transform.position, Quaternion.identity);
 			}
 			if(!jumping) {
 				Vector2 accelerationVector;
@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour {
 			started = false;
 			string distance = (transform.position.x - 41).ToString();
 			distanceMarker.text = distance.Substring(0, distance.IndexOf('.') + 2);
+			GameObject.Find("Directional Light").GetComponent<ThunderLightControl>().active = false;
+			GameObject.Find("Directional Light").GetComponent<Light>().intensity = 10;
 		}
 	}
 	void OnCollisionExit2D(Collision2D other) {

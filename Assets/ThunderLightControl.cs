@@ -12,27 +12,30 @@ public class ThunderLightControl : MonoBehaviour {
 
 	bool isLighting = false;
 
+	public bool active;
 	// Use this for initialization
 	void Start () {
+		active = true;
 		thunder = gameObject.GetComponent<Light>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (isLighting == false) {
-			// if it is not lighting, randomly make one
+		if(active) {
+			if (isLighting == false) {
+				// if it is not lighting, randomly make one
 			// pick a number between 0 and 10
-			randomFrameForLighting = Random.Range (0.0f, 10.0f);
-
-			// turn light on if it is smaller than lightRateControl 
-			if (randomFrameForLighting <= lightRateControl) {
-				LightOn (); // turn on light
-				isLighting = true;
-			}
-		} else {
-			Lighting (); // make light weaker and weaker after turned on
-		}	
+				randomFrameForLighting = Random.Range (0.0f, 10.0f);
+	
+			// turn light on if it is smaller than lightRateControl 	
+				if (randomFrameForLighting <= lightRateControl) {
+					LightOn (); // turn on light
+					isLighting = true;
+				}
+			} else {
+				Lighting (); // make light weaker and weaker after turned on
+			}	
+		}
 	}
 
 	// this is the function suddently turn on light
