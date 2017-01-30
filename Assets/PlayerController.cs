@@ -51,6 +51,10 @@ public class PlayerController : MonoBehaviour {
 			jumping = false;
 			transform.GetChild(1).up = other.contacts[0].normal;
 		}
+		else {
+			rb.velocity = Vector2.zero;
+			rb.constraints = RigidbodyConstraints2D.FreezeAll;
+		}
 	}
 	void OnCollisionExit2D(Collision2D other) {
 		if(other.collider.tag == "Slope") {
