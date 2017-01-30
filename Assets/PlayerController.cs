@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
 	Rigidbody2D rb;
+	public Text distanceMarker;
 	bool grounded;
 	bool started = false;
 	bool jumping;
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(started) {
+			string distance = (Random.value * 1000).ToString();
+			distanceMarker.text = distance.Substring(0, distance.IndexOf('.') + 2);
 			Vector2 AccelerationVector = Vector2.zero;
 			//Debug.Log(rb.velocity);
 			if(Input.GetKeyDown(KeyCode.Space) && grounded) {
@@ -54,6 +58,9 @@ public class PlayerController : MonoBehaviour {
 		else {
 			rb.velocity = Vector2.zero;
 			rb.constraints = RigidbodyConstraints2D.FreezeAll;
+			started = false;
+			string distance = (transform.position.x - 41).ToString();
+			distanceMarker.text = distance.Substring(0, distance.IndexOf('.') + 2);
 		}
 	}
 	void OnCollisionExit2D(Collision2D other) {
