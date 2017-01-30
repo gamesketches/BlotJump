@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	bool started = false;
 	bool jumping;
 	float curGravity = 1;
+	bool switched = false;
 
 	// Use this for initialization
 	void Start () {
@@ -45,8 +46,14 @@ public class PlayerController : MonoBehaviour {
 				}
 				rb.gravityScale = curGravity;
 				rb.AddForce(accelerationVector, ForceMode2D.Impulse);
+				if(transform.position.x > 41 && !switched) {
+					SpriteRenderer rend = GetComponentsInChildren<SpriteRenderer>()[1];
+					rend.sprite = Resources.Load<Sprite>("SkierTrip");
+					switched = true;
+					curGravity = 3;
 				}
-			if(jumping) {
+				}
+			else {
 				transform.GetChild(1).RotateAround(Vector3.forward, 1 * Time.deltaTime);
 			}
 		}
