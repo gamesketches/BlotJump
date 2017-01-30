@@ -31,18 +31,21 @@ public class PlayerController : MonoBehaviour {
 				rb.gravityScale = 1;
 				rb.AddForce(Vector2.up * 100, ForceMode2D.Impulse);
 				jumping = true;
+				Debug.Log("jamp");
 			}
+			if(!jumping) {
 				Vector2 accelerationVector;
 				if(transform.rotation.z < 0 || transform.rotation.z > 270) {
 					accelerationVector = new Vector2(transform.right.x, transform.right.y) * Input.GetAxis("Horizontal") * Time.deltaTime * 10;
-					curGravity = grounded ? 10 : 1;
+					curGravity = grounded ? 10 : 3;
 				}
 				else {
 					accelerationVector = new Vector2(transform.right.x * - 1, transform.right.y * -1) * Input.GetAxis("Horizontal") * Time.deltaTime * 10;
-					curGravity = 1;
+					curGravity = 2;
 				}
 				rb.gravityScale = curGravity;
 				rb.AddForce(accelerationVector, ForceMode2D.Impulse);
+				}
 			if(jumping) {
 				transform.GetChild(1).RotateAround(Vector3.forward, 1 * Time.deltaTime);
 			}
@@ -66,7 +69,9 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionExit2D(Collision2D other) {
 		if(other.collider.tag == "Slope") {
 			grounded = false;
-			rb.gravityScale = 1;
+			if(!jumping) {
+				rb.gravityScale = 3;
+			}
 		}
 	}
 
